@@ -1,0 +1,54 @@
+ Please note we are using Docker Compose version 3
+version: '3'
+services:
+    # node-red
+    node-red:
+        # node-red image
+        image: nodered/node-red-docker
+        container_name: node-red
+#        command: "node-red"
+        networks:
+            sensor-project-external:
+              ipv4_address: 1.2.5.1
+        ports:
+            - "1880:1880"
+
+    # node-red
+    node-red-2:
+        # node-red image
+        image: jalves7/node-red
+        container_name: node-red-2
+        command: "node-red"
+        networks:
+            sensor-project-external:
+              ipv4_address: 1.2.5.4
+        ports:
+            - "1881:1880"
+
+    # mongo
+    mongodb:
+        # mongo
+        image: mongo
+        container_name: mongodb
+        networks:
+            sensor-project-external:
+              ipv4_address: 1.8.5.2
+        #ports:
+        #    - "1880:1880"
+
+    # mongo
+    mosquitto:
+        # mosquitto mqtt
+        image: eclipse-mosquitto
+        container_name: mosquitto
+        networks:
+            sensor-project-external:
+              ipv4_address: 1.8.5.3
+        ports:
+            - "1883:1883"
+
+networks:
+     sensor-project-external:
+         external:
+            name: sensor-project
+                                     
