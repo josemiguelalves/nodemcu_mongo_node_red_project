@@ -1,0 +1,1 @@
+db.createCollection("measures", { capped : true, size : 5242880, max : 20160 } )
